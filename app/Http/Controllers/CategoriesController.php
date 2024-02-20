@@ -16,12 +16,13 @@ class CategoriesController extends Controller
             return DataTables::of($category)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-name="Edit" class="edit btn btn-primary btn-sm editCategory"><i class="fa fa-pen"></i></a>';
-
-                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-name="Delete" class="btn btn-danger btn-sm deleteCategory"><i class="fa fa-trash"></i></a>';
-
-                    return $btn;
+                    $editBtn = '<button type="button" class="btn btn-primary btn-sm editKategori" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Edit"><i class="fa fa-pen"></i></button>';
+                    
+                    $deleteBtn = '<button type="button" class="btn btn-danger btn-sm deleteKategori" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Delete"><i class="fa fa-trash"></i></button>';
+                    
+                    $buttonGroup = '<div class="btn-group" role="group">' . $editBtn . $deleteBtn . '</div>';
+                    
+                    return $buttonGroup;
                 })
                 ->rawColumns(['action'])
                 ->make(true);

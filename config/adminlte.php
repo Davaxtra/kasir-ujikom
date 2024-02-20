@@ -152,7 +152,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -343,7 +343,7 @@ return [
         ],
         [
             'text' => 'Transaksi',
-            'icon' => 'fas fa-fw fa-credit-card',
+            'icon' => 'fas fa-fw fa-tags',
             'url'  => 'transaction'
         ],
         ['header' => 'account_settings'],

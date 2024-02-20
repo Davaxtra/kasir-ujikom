@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="stock" class="col-sm-2 control-label">Stok</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="stock" name="stock" placeholder="Masukan Stok Produk" value="" required>
+                            <input type="number" class="form-control" id="stock" name="stock" placeholder="Masukan Stok Produk" value="" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,9 +74,6 @@
                                     <span class="input-group-text">Rp.</span>
                                 </div>
                                 <input type="text" class="form-control" id="price" name="price" value="">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">.00</span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,8 +89,7 @@
 @endsection
 @section('js')
 <script>
-    var SITEURL = '{{URL::to('
-    ')}}'
+    // var SITEURL = '{{URL::to('')}}',
     $(function() {
 
         $.ajaxSetup({
@@ -139,7 +135,7 @@
                     orderable: false,
                     searchable: false
                 },
-            ]
+            ],
         });
 
         $('#createNewProduct').click(function() {
@@ -161,17 +157,16 @@
             $('#name').val(data.name);
             $('#category').val(data.category_id);
 
-            var imageUrl = SITEURL + 'storage/product/' + data.image;
-            $('#image').attr('src', imageUrl);
+            var imageUrl = "{{ asset("storage/product") }}" + "/" + data.image;
+            $('#image').val(data.imageUrl);
             $('#imagePreview').attr('src', imageUrl);
-            // if(data.image){
-            //     $('#imagePreview').attr('src',imageUrl);
-            // }
+            if(data.image){
+                $('#imagePreview').attr('src',imageUrl);
+            }
             $('#stock').val(data.stock);
             $('#price').val(data.price);
             $('#productModal').modal('show');
         })
-        console.log();
     })
 
     //     $('.catItem').select2({

@@ -81,7 +81,7 @@
         $('#ajaxModelexa').modal('show');
     });
 
-    $('body').on('click', '.editCategory', function () {
+    $('body').on('click', '.editKategori', function () {
       var cat_id = $(this).data('id');
       $.get("{{ route('category.index') }}" +'/' + cat_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Category");
@@ -130,7 +130,7 @@
         });
     });
 
-    $('body').on('click', '.deleteCategory', function () {
+    $('body').on('click', '.deleteKategori', function () {
      
      var id = $(this).data("id");
      Swal.fire({

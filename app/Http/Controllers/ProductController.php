@@ -32,14 +32,27 @@ class ProductController extends Controller
                     $url = asset('storage/product/' . $row->image);
                     return ' <img id="preview" src=' . $url . ' alt="Preview" class="form-group hidden" width="100" height="100" style="border: 5px solid #555;">';
                 })
-                ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-name="Edit" class="edit btn btn-primary btn-sm editProduct"><i class="fa fa-pen"></i></a>';
-
-                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-name="Delete" class="btn btn-danger btn-sm deleteProduct"><i class="fa fa-trash"></i></a>';
-
-                    return $btn;
+                ->addColumn('price', function ($row) {
+                    return "Rp. " . number_format( $row->price);
                 })
-                ->rawColumns(['action', 'image'])
+                ->addColumn('action', function ($row) {
+                    $editBtn = '<button type="button" class="btn btn-primary btn-sm editProduct" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Edit"><i class="fa fa-pen"></i></button>';
+                    
+                    $deleteBtn = '<button type="button" class="btn btn-danger btn-sm deleteProduct" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Delete"><i class="fa fa-trash"></i></button>';
+                    
+                    $buttonGroup = '<div class="btn-group" role="group">' . $editBtn . $deleteBtn . '</div>';
+                    
+                    return $buttonGroup;
+                })
+                ->addColumn('stock', function ($row) {
+                    // Tambahkan label Bootstrap berdasarkan kondisi stok
+                    $labelClass = 'success'; // default label success
+                    if ($row->stock < 10) {
+                        $labelClass = 'danger'; // jika stok kurang dari 10
+                    }
+                    return '<span class="badge badge-' . $labelClass . '">' . $row->stock . '</span>';
+                })
+                ->rawColumns(['action', 'image', 'stock'])
                 ->make(true);
         }
         return view('pages.products.index', compact('categories'));
@@ -63,43 +76,46 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        request()->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-        ]);
+{
+    request()->validate([
+        'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+    ]);
 
-        $id = $request->id;
+    $id = $request->id;
 
-        $details = [
-            'name' => $request->name,
-            'category_id' => $request->category,
-            'stock' => $request->stock,
-            'price' => $request->price,
-        ];
-        $product = Product::find($id);
+    $details = [
+        'name' => $request->name,
+        'category_id' => $request->category,
+        'stock' => $request->stock,
+        'price' => $request->price,
+    ];
+    $product = Product::find($id);
 
-        if ($product) {
-            // Hapus file gambar yang terkait dengan produk sebelumnya
-            if ($product->image) {
-                File::delete('storage/product/' . $product->image);
-            }
+    // if ($product) {
+    //     // Hapus file gambar yang terkait dengan produk sebelumnya
+    //     if ($product->image) {
+    //         File::delete('storage/product/' . $product->image);
+    //     }
+    // }
+
+    if ($files = $request->file('image')) {
+
+        //delete old file
+        if ($product && $product->image) {
+            File::delete('storage/product/' . $product->image);
         }
 
-        if ($files = $request->file('image')) {
-
-            //delete old file
-            // File::delete('public/product/' . $request->image);
-
-            //insert new file
-            $destinationPath = 'storage/product/'; // upload path
-            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $profileImage);
-            $details['image'] = "$profileImage";
-        }
-        $product = Product::updateOrCreate(['id' => $id], $details);
-
-        return response()->json($product);
+        //insert new file
+        $destinationPath = 'storage/product/'; // upload path
+        $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $files->move($destinationPath, $profileImage);
+        $details['image'] = $profileImage;
     }
+    $product = Product::updateOrCreate(['id' => $id], $details);
+
+    return response()->json($product);
+}
+
 
     /**
      * Display the specified resource.
