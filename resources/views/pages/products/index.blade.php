@@ -6,7 +6,7 @@
 @stop
 
 @section('content')
-
+<div class="container-fluid">
 <div class="with-border">
     <button class="btn btn-primary mb-2" data-bs-toggle="modal" id="createNewProduct"><i class="fas fa-plus mr-1"></i>Tambah Produk</button>
 </div>
@@ -85,7 +85,9 @@
         </div>
     </div>
 </div>
+</div>
 {{-- add product modal end --}}
+
 @endsection
 @section('js')
 <script>

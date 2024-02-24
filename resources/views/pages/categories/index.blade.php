@@ -49,6 +49,15 @@
 </div>
 {{-- add new cat modal end --}}
 @endsection
+
+@section('footer')
+    <strong>Copyright &copy; 2024 <a href="https://github.com/Davaxtra">Mohammad Daffa Hafidzan</a>.</strong>
+        All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 2.0
+    </div>
+@stop
+
 @section('js')
     <script>
         
@@ -75,7 +84,7 @@
 
     $('#createNewCat').click(function () {
         $('#savedata').val("create-category");
-        $('#id').val('');
+        $('#cat_id').val('');
         $('#catForm').trigger("reset");
         $('#modelHeading').html("Tambah Kategori");
         $('#ajaxModelexa').modal('show');
@@ -83,7 +92,7 @@
 
     $('body').on('click', '.editKategori', function () {
       var cat_id = $(this).data('id');
-      $.get("{{ route('category.index') }}" +'/' + cat_id +'/edit', function (data) {
+      $.get("category" +'/' + cat_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Category");
           $('#savedata').val("edit-category");
           $('#cat_id').val(data.id);
@@ -107,18 +116,6 @@
                 'Data sukses disimpan!',
                 'success'
             )
-            // var Toast = Swal.mixin({
-            // toast: true,
-            // position: 'top-end',
-            // showConfirmButton: false,
-            // progressBar: true,
-            // timer: 3000
-            // });
-            // Toast.fire({
-            // icon: 'success',
-            // title: 'Data sukses disimpan!'
-            // })
-            // toastr.success('Data berhasil disimpan!')
               $('#catForm').trigger("reset");
               $('#ajaxModelexa').modal('hide');
               table.ajax.reload();

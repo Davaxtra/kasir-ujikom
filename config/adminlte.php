@@ -132,9 +132,9 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -255,7 +255,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -336,7 +336,7 @@ return [
                 ],
                 [
                     'text' => 'Pegawai',
-                    'url'  => '#',
+                    'url'  => 'pegawai',
                     'icon' => 'fas fa-fw fa-user-friends'
                 ],
             ]
@@ -469,16 +469,16 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
+                    'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => true,
+                    'asset' => false,
                     'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
                 ],
             ],

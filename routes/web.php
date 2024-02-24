@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index']);
+
 
 // Route::controller(CategoriesController::class)->group(function () {
 //     Route::get('/category', 'index')->name('categories.index');
@@ -33,4 +35,16 @@ Route::resource('product', ProductController::class);
 //     Route::delete('/product/delete', 'delete')->name('product.delete');
 //     Route::get('/product/edit' . 'edit')->name('product.edit');
 //     Route::post('/product/update', 'update')->name('product.update');
+// });
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index']);
+Route::resource('pegawai', UserController::class);
+// Route::controller(UserController::class)->group(function(){
+//     Route::get('/pegawai', 'index')->name('pegawai');
+//     Route::post('/pegawai/store', 'store')->name('pegawai.store');
+//     Route::get('/pegawai/{id}/edit', 'edit')->name('pegawai.edit');
+//     // Route::delete()
 // });

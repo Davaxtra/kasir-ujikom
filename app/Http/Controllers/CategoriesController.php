@@ -33,16 +33,25 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-        Category::updateOrCreate(
-            [
-                'id' => $request->cat_id
-            ],
-            [
-                'name' => $request->name
-            ]
-        );
+         // Lakukan validasi
+    $validatedData = $request->validate([
+        'name' => 'required|string',
+        'cat_id' => 'nullable|exists:categories,id',
+    ]);
 
-        return response()->json(['success' => 'Product saved successfully.']);
+    if ($validatedData['cat_id']) {
+        // Jika cat_id tersedia, lakukan update
+        Category::where('id', $validatedData['cat_id'])->update([
+            'name' => $validatedData['name'],
+        ]);
+    } else {
+        // Jika cat_id tidak tersedia, buat entri baru
+        Category::create([
+            'name' => $validatedData['name'],
+        ]);
+    }
+
+    return response()->json(['success' => 'Product saved successfully.']);
     }
 
     public function edit($id)

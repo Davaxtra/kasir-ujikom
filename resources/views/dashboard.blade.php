@@ -69,6 +69,14 @@
 
 @stop
 
+@section('footer')
+    <strong>Copyright &copy; 2024 <a href="https://github.com/Davaxtra">Mohammad Daffa Hafidzan</a>.</strong>
+        All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 2.0
+    </div>
+@stop
+
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
