@@ -73,7 +73,7 @@
           serverSide: true,
           autoWidth: false,
           responsive: true,
-          ajax: "{{ route('category.index') }}",
+          ajax: "{{ route('kategori.index') }}",
           columns: [
               {data: 'DT_RowIndex'},
               {data: 'name', name: 'name'},
@@ -92,7 +92,7 @@
 
     $('body').on('click', '.editKategori', function () {
       var cat_id = $(this).data('id');
-      $.get("category" +'/' + cat_id +'/edit', function (data) {
+      $.get("kategori" +'/' + cat_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Category");
           $('#savedata').val("edit-category");
           $('#cat_id').val(data.id);
@@ -107,7 +107,7 @@
     
         $.ajax({
           data: $('#catForm').serialize(),
-          url: "{{ route('category.store') }}",
+          url: "{{ route('kategori.store') }}",
           type: "POST",
           dataType: 'json',
           success: function (data) {
@@ -143,7 +143,7 @@
             if (result.isConfirmed){
                  $.ajax({
          type: "DELETE",
-         url: "{{ route('category.store') }}"+'/'+id,
+         url: "{{ route('kategori.store') }}"+'/'+id,
          success: function (data) {
             // Swal.fire(
             //       'Terhapus!',

@@ -105,7 +105,7 @@
             autoWidth: false,
             responsive: true,
             ajax: {
-                url: "{{ route('product.index') }}",
+                url: "{{ route('produk.index') }}",
                 type: 'GET',
             },
             columns: [{
@@ -152,7 +152,7 @@
 
     $('body').on('click', '.editProduct', function() {
         var product_id = $(this).data('id');
-        $.get('product' + '/' + product_id + '/edit', function(data) {
+        $.get('produk' + '/' + product_id + '/edit', function(data) {
             $('#savedata').val('#edit-product');
             $('#modelHeading').html("Edit Produk");
             $('#id').val(data.id);
@@ -171,25 +171,6 @@
         })
     })
 
-    //     $('.catItem').select2({
-    //     placeholder: 'Pilih Kategori',
-    //     ajax: {
-    //       url: '{{ route("product.create") }}',
-    //       dataType: 'json',
-    //       processResults: function (data) {
-    //         return {
-    //           results:  $.map(data, function (item) {
-    //                 return {
-    //                     text: item.name,
-    //                     id: item.id
-    //                 }
-    //             })
-    //         };
-    //       },
-    //       cache: true
-    //     }
-    //   });
-
     $('body').on('submit', '#productForm', function(e) {
         e.preventDefault();
         var actionType = $('#savedata').val();
@@ -199,7 +180,7 @@
 
         $.ajax({
             type: 'POST',
-            url: "{{ route('product.store') }}",
+            url: "{{ route('produk.store') }}",
             data: formData,
             cache: false,
             contentType: false,
@@ -237,7 +218,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('product.store') }}" + '/' + id,
+                    url: "{{ route('produk.store') }}" + '/' + id,
                     success: function(data) {
                         toastr.options.progressBar = true;
                         toastr.success('Data berhasil dihapus!');

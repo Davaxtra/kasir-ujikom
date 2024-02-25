@@ -326,12 +326,12 @@ return [
             'submenu'     => [
                 [
                     'text' => 'Kategori',
-                    'url'  => 'category',
+                    'url'  => 'kategori',
                     'icon' => 'fas fa-fw fa-cube'
                 ],
                 [
                     'text' => 'Produk',
-                    'url'  => 'product',
+                    'url'  => 'produk',
                     'icon' => 'fas fa-fw fa-utensils'
                 ],
                 [

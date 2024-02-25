@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return 'https://picsum.photos/300/300';
     }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

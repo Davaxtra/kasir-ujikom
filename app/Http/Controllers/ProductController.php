@@ -16,6 +16,11 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth'); // Middleware auth akan dijalankan sebelum metode controller dijalankan
+    }
+
     public function index()
     {
 

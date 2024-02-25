@@ -9,6 +9,11 @@ use Yajra\DataTables\DataTables;
 
 class CategoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth'); // Middleware auth akan dijalankan sebelum metode controller dijalankan
+    }
+
     public function index(Request $request)
     {
         if ($request->ajax()) {

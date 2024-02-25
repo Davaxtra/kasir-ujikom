@@ -11,9 +11,10 @@ class UserController extends Controller
 {
     //
     public function index(Request $request){
+        $this->middleware('auth');
 
         if($request->ajax()){
-            $pegawai = User::latest()->get();
+            $pegawai = User::orderBy('id', 'asc')->get();
             return DataTables::of($pegawai)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -25,7 +26,18 @@ class UserController extends Controller
                 
                 return $buttonGroup;
             })
-            ->rawColumns(['action'])
+            ->addColumn('role', function ($row){
+                // menambah label bootstrap berdasarkan level
+                $labelClass = 'primary'; //default
+                if ($row->role == 'petugas'){
+                    $labelClass = 'info';
+                }
+                if ($row->role == 'kasir'){
+                    $labelClass = 'secondary';
+                }
+                return '<span class="badge badge-' . $labelClass . '">' . $row->role . '</span>';
+            })
+            ->rawColumns(['action', 'role'])
             ->make(true);
         }
 
