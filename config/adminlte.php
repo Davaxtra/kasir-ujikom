@@ -213,7 +213,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => true,
+    'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
@@ -321,6 +321,7 @@ return [
             // 'label_color' => 'success',
         ],
         [
+            'can'  => ['admin-access'],
             'text'        => 'Master',
             'icon'        => 'fas fa-fw fa-folder',
             'submenu'     => [
@@ -342,14 +343,21 @@ return [
             ]
         ],
         [
+            'can'  => ['petugas-access'],
+            'text' => 'Produk',
+            'url'  => 'produk',
+            'icon' => 'fas fa-fw fa-utensils'
+        ],
+        [
             'text' => 'Transaksi',
             'icon' => 'fas fa-fw fa-tags',
             'url'  => 'transaksi'
         ],
         [
+            'can'  => ['admin-access'],
             'text' => 'Laporan',
             'icon' => 'fas fa-fw fa-file',
-            'url'  => '#'
+            'url'  => '#',
         ],
         ['header' => 'account_settings'],
         [

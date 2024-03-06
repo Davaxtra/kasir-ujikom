@@ -54,6 +54,19 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        // Validasi data input
+        $request->validate([
+            'produk_id' => 'required|array',
+            'jumlah' => 'required|array',
+            'subtotal' => 'required|array',
+            'total' => 'required|numeric|min:0',
+            'bayar' => 'required|numeric|min:' . $request->total,
+            'kembalian' => 'required|numeric|min:0',
+        ], [
+            'bayar.min' => 'Jumlah bayar harus sama atau lebih besar dari total harga.',
+            'kembalian.min' => 'Kembalian tidak boleh negatif.',
+        ]);
+
         // Mendapatkan data dari request
         $id_produk = $request->produk_id;
         $jumlah_produk = $request->jumlah;

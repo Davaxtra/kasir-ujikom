@@ -97,13 +97,12 @@
                 <div class="card-header">
                     <div class="card-title"><strong>Keranjang</strong></div>
                 </div>
-                
-                    <div class="card-body" style="overflow-y: auto; min-height:55vh; max-height: 55vh;" id="cart">
-                        <p id="empty-cart-msg">Keranjang belanja kosong.</p>
-                    </div>
-                    <div class="card-footer">
-                        <div>
-                            <form action="{{ route('transaksi.store') }}" id="formPembayaran" method="POST">
+                <div class="card-body" style="overflow-y: auto; min-height:55vh; max-height: 55vh;" id="cart">
+                    <p id="empty-cart-msg">Keranjang belanja kosong.</p>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <form action="{{ route('transaksi.store') }}" id="formPembayaran" method="POST">
                             @csrf
                             <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label" for="total">Total</label>
@@ -124,15 +123,14 @@
                             {{-- <input type="hidden" name="jumlah[]" id="jumlah" value="">
                             <input type="hidden" name="subtotal[]" id="subtotal" value="">
                             <input type="hidden" name="produk_id[]" id="produk_id" value=""> --}}
-                            <button type="submit" class="btn btn-primary">Cetak</button>
-                </form>
-
+                            <button type="submit" id="btnCetak" class="btn btn-primary">Cetak</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-</div>
+    </div>
 </div>
 
 <script src="{{ asset('/js/transaksibackup.js')}}"></script>

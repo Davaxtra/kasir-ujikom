@@ -74,7 +74,7 @@ function addToCart(data) {
             var currentQuantity = parseInt(qty.text());
             if (currentQuantity > 1) {
                 qty.text(currentQuantity - 1);
-                updateSubtotal(); // Memanggil kembali fungsi untuk memperbarui subtotal
+                // Memanggil kembali fungsi untuk memperbarui subtotal
             } else {
                 cardWrap.remove();
                 console.log("Card " + data.name + " dihapus dari keranjang");
@@ -83,9 +83,9 @@ function addToCart(data) {
                         '<p id="empty-cart-msg">Keranjang belanja kosong.</p>'
                     );
                 }
-                updateTotalPrice(); // Memanggil kembali fungsi untuk memperbarui total harga setelah menghapus item
-                updateSubtotal();
             }
+            updateSubtotal(); 
+            updateTotalPrice(); // Memanggil kembali fungsi untuk memperbarui total harga setelah menghapus item
         });
 
         // Event listener untuk tombol increase
@@ -173,7 +173,7 @@ $("#bayar").on("input", function () {
     var kembalian = uang - total;
 
     $("#kembalian").val(kembalian);
-    console.log("kanjut");
+    console.log("bayar");
 });
 
 function bayar(uang) {
@@ -190,5 +190,6 @@ function hitungKembalian() {
     var kembalian = uang - total;
 
     $("#kembalian").val(kembalian);
-    console.log("kanjut");
+    
+    console.log("kembalian update");
 }

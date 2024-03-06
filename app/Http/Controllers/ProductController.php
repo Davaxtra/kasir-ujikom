@@ -38,15 +38,15 @@ class ProductController extends Controller
                     return ' <img id="preview" src=' . $url . ' alt="Preview" class="form-group hidden" width="100" height="100" style="border: 5px solid #555;">';
                 })
                 ->addColumn('price', function ($row) {
-                    return "Rp. " . number_format( $row->price);
+                    return "Rp. " . number_format($row->price);
                 })
                 ->addColumn('action', function ($row) {
                     $editBtn = '<button type="button" class="btn btn-primary btn-sm editProduct" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Edit"><i class="fa fa-pen"></i></button>';
-                    
+
                     $deleteBtn = '<button type="button" class="btn btn-danger btn-sm deleteProduct" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Delete"><i class="fa fa-trash"></i></button>';
-                    
+
                     $buttonGroup = '<div class="btn-group" role="group">' . $editBtn . $deleteBtn . '</div>';
-                    
+
                     return $buttonGroup;
                 })
                 ->addColumn('stock', function ($row) {
@@ -81,45 +81,45 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    request()->validate([
-        'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-    ]);
+    {
+        request()->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+        ]);
 
-    $id = $request->id;
+        $id = $request->id;
 
-    $details = [
-        'name' => $request->name,
-        'category_id' => $request->category,
-        'stock' => $request->stock,
-        'price' => $request->price,
-    ];
-    $product = Product::find($id);
+        $details = [
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'stock' => $request->stock,
+            'price' => $request->price,
+        ];
+        $product = Product::find($id);
 
-    // if ($product) {
-    //     // Hapus file gambar yang terkait dengan produk sebelumnya
-    //     if ($product->image) {
-    //         File::delete('storage/product/' . $product->image);
-    //     }
-    // }
+        // if ($product) {
+        //     // Hapus file gambar yang terkait dengan produk sebelumnya
+        //     if ($product->image) {
+        //         File::delete('storage/product/' . $product->image);
+        //     }
+        // }
 
-    if ($files = $request->file('image')) {
+        if ($files = $request->file('image')) {
 
-        //delete old file
-        if ($product && $product->image) {
-            File::delete('storage/product/' . $product->image);
+            //delete old file
+            if ($product && $product->image) {
+                File::delete('storage/product/' . $product->image);
+            }
+
+            //insert new file
+            $destinationPath = 'storage/product/'; // upload path
+            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $profileImage);
+            $details['image'] = $profileImage;
         }
+        $product = Product::updateOrCreate(['id' => $id], $details);
 
-        //insert new file
-        $destinationPath = 'storage/product/'; // upload path
-        $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-        $files->move($destinationPath, $profileImage);
-        $details['image'] = $profileImage;
+        return response()->json($product);
     }
-    $product = Product::updateOrCreate(['id' => $id], $details);
-
-    return response()->json($product);
-}
 
 
     /**
