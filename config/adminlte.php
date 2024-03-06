@@ -213,7 +213,7 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
@@ -344,7 +344,12 @@ return [
         [
             'text' => 'Transaksi',
             'icon' => 'fas fa-fw fa-tags',
-            'url'  => 'transaction'
+            'url'  => 'transaksi'
+        ],
+        [
+            'text' => 'Laporan',
+            'icon' => 'fas fa-fw fa-file',
+            'url'  => '#'
         ],
         ['header' => 'account_settings'],
         [

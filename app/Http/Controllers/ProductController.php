@@ -60,7 +60,7 @@ class ProductController extends Controller
                 ->rawColumns(['action', 'image', 'stock'])
                 ->make(true);
         }
-        return view('pages.products.index', compact('categories'));
+        return view('pages.produk.index', compact('categories'));
     }
 
     /**

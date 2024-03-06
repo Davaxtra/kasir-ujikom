@@ -20,7 +20,7 @@
                 <div class="icon">
                     <i class="fas fa-cube"></i>
                 </div>
-                <a href="{{ route('category.index') }}" class="small-box-footer">
+                <a href="{{ route('kategori.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -39,7 +39,7 @@
                 <div class="icon">
                     <i class="fas fa-utensils"></i>
                 </div>
-                <a href="{{ route('product.index') }}" class="small-box-footer">
+                <a href="{{ route('produk.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>

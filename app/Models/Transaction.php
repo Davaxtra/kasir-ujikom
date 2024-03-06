@@ -11,8 +11,9 @@ class Transaction extends Model
 
     protected $fillable = [
         'kasir_id',
-        'tgl',
-        'total_harga'
+        'total_harga',
+        'bayar',
+        'kembalian'
     ];
 
     public function details()

@@ -10,9 +10,10 @@ class DetailTransaction extends Model
     use HasFactory;
 
     protected $fillable = [
+        'transaksi_id',
         'produk_id',
         'qty',
-        'harga'
+        'subtotal'
     ];
 
     public function transaction()

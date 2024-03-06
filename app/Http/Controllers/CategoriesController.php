@@ -17,8 +17,8 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $category = Category::latest()->get();
-            return DataTables::of($category)
+            $kategori = Category::latest()->get();
+            return DataTables::of($kategori)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $editBtn = '<button type="button" class="btn btn-primary btn-sm editKategori" data-toggle="tooltip" data-id="' . $row->id . '" data-original-name="Edit"><i class="fa fa-pen"></i></button>';
@@ -33,7 +33,7 @@ class CategoriesController extends Controller
                 ->make(true);
         }
 
-        return view('pages.categories.index');
+        return view('pages.kategori.index');
     }
 
     public function store(Request $request)
@@ -61,8 +61,8 @@ class CategoriesController extends Controller
 
     public function edit($id)
     {
-        $category = Category::find($id);
-        return response()->json($category);
+        $kategori = Category::find($id);
+        return response()->json($kategori);
     }
 
     public function destroy($id)

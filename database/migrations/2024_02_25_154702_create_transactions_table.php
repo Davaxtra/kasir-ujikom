@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kasir_id');
             $table->foreign('kasir_id')->references('id')->on('users');
-            $table->datetime('tgl');
             $table->decimal('total_harga', 10, 2);
+            $table->decimal('bayar', 10, 2);
+            $table->decimal('kembalian', 10, 2);
             $table->timestamps();
         });
     }
