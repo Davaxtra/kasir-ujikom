@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailTransactionController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -25,10 +26,12 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     // Rute-rute yang memerlukan autentikasi
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/pendapatanChart', [DashboardController::class, 'pendapatanChart']);
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('pegawai', UserController::class);
     Route::resource('kategori', CategoriesController::class);
     Route::resource('produk', ProductController::class);
     Route::resource('transaksi', TransactionController::class);
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
     // Route::post('/buat-transaksi', [TransactionController::class, 'store'])->name('transaksi.store');
 });

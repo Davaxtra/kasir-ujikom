@@ -3,6 +3,17 @@ $.ajaxSetup({
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
     },
 });
+function updateSubtotal(qtyElement, data, jumlah, subtotal) {
+    var qtyValue = parseInt(qtyElement.text()); // Get the quantity value
+    var price = parseFloat(data.price); // Get the price value from the data
+
+    var newSubtotalValue = qtyValue * price; // Calculate the new subtotal
+
+    // Update the value of jumlah and subtotal inputs
+    jumlah.val(qtyValue);
+    subtotal.val(newSubtotalValue);
+    console.log('ini kawan:' + qtyValue);
+}
 
 function addToCart(data) {
     var data = JSON.parse(data);
@@ -27,7 +38,8 @@ function addToCart(data) {
                     " diperbarui: " +
                     (currentQuantity + 1)
             );
-            updateSubtotal();
+            updateTotalPrice();
+            updateSubtotal(quantityElement, data, jumlah, subtotal);
         }
     } else {
         // Jika kartu dengan ID yang sama belum ada di keranjang, tambahkan ke keranjang
@@ -77,6 +89,9 @@ function addToCart(data) {
                 // Memanggil kembali fungsi untuk memperbarui subtotal
             } else {
                 cardWrap.remove();
+                jumlah.remove();
+                subtotal.remove();
+                produk_id.remove();
                 console.log("Card " + data.name + " dihapus dari keranjang");
                 if (cart.find(".info-box").length === 0) {
                     cart.append(
@@ -84,7 +99,7 @@ function addToCart(data) {
                     );
                 }
             }
-            updateSubtotal(); 
+            updateSubtotal(qty, data, jumlah, subtotal);
             updateTotalPrice(); // Memanggil kembali fungsi untuk memperbarui total harga setelah menghapus item
         });
 
@@ -99,7 +114,7 @@ function addToCart(data) {
                         " diperbarui: " +
                         (currentQuantity + 1)
                 );
-                updateSubtotal(); // Memanggil kembali fungsi untuk memperbarui subtotal
+                updateSubtotal(qty, data, jumlah, subtotal); // Memanggil kembali fungsi untuk memperbarui subtotal
                 updateTotalPrice();
             }
         });
@@ -127,22 +142,23 @@ function addToCart(data) {
         $("#formPembayaran").append(subtotal);
 
         // update subtotal
-        function updateSubtotal() {
-            var qtyValue = parseInt(qty.text()); // mendapatkan nilai qty
-            var price = parseFloat(data["price"]); // mendapatkan nilai harga dari data
+        // function updateSubtotal() {
+        //     var qtyValue = parseInt(qty.text()); // mendapatkan nilai qty
+        //     var price = parseFloat(data["price"]); // mendapatkan nilai harga dari data
 
-            var newSubtotalValue = qtyValue * price; // subtotal diubah sesuai perhitungan qty * harga
+        //     var newSubtotalValue = qtyValue * price; // subtotal diubah sesuai perhitungan qty * harga
 
-            // Update nilai pada elemen subtotal
-            jumlah.val(qtyValue);
-            subtotal.val(newSubtotalValue);
-        }
+        //     // Update nilai pada elemen subtotal
+        //     jumlah.val(qtyValue);
+        //     subtotal.val(newSubtotalValue);
+        // }
     }
 
     // Menghapus pesan "Keranjang belanja kosong" jika ada kartu yang ditambahkan
     cart.find("#empty-cart-msg").remove();
 
     updateTotalPrice(data);
+    updateSubtotal(qty, data, jumlah, subtotal);
 }
 
 function updateTotalPrice() {
